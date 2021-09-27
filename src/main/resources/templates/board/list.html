@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>글목록</title>
 </head>
 <body>
 
 <table border="1">
-    <th>번호</th>
+    <th>작성날짜</th>
     <th>제목</th>
     <th>작성자</th>
     <th>작성날짜</th>
-    <tr>
-        <td th:text="${test}"></td>
-        <td th:text="${test}"></td>
-        <td th:text="${test}"></td>
-        <td th:text="${test}"></td>
+    <tr th:each="value,i : ${list}">
+        <td th:text="${i.index+1}"></td>
+        <td><a th:href="@{/detail(id=${value.id})}" th:text="${value.title}"></a></td>
+        <td th:text="${value.writer}"></td>
+        <td th:text="${#dates.format(value.created_date, 'yyyy-MM-dd')}"></td>
     </tr>
 </table>
-
+<button name="button" onclick="location.href='/write'">작성버튼</button>
 </body>
 </html>

@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>글작성</title>
 </head>
 <body>
-
+    <form action="/boardWrite" method="post">
+        작성자 : <input type="text" name="writer" size="12"></br>
+        제목 : <input type="text" name="title" size="12"></br>
+        <textarea class="form-control" rows="5" name="content"
+                  placeholder="내용 작성"></textarea>
+        <input type="submit" value="등록">
+    </form>
 </body>
 </html>

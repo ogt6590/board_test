@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>글작성</title>
 </head>
 <body>
-
+<form action="/boardWrite" method="post">
+    작성자 : <input type="text" name="writer" size="12" readonly th:value="${value.writer}"> </br>
+    제목 : <input type="text" name="title" size="12"readonly th:value="${value.title}"></br>
+    <textarea class="form-control" rows="5" name="content" readonly th:text="${value.content}">
+    </textarea>  
+</form>
 </body>
 </html>
