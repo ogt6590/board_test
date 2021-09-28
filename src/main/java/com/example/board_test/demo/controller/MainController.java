@@ -35,18 +35,7 @@ public class MainController {
     //게시글 등록
     @RequestMapping("/boardWrite")
     public String boardWrite(HttpServletRequest request){
-        String writer=request.getParameter("writer");
-        String title=request.getParameter("title");
-        String content=request.getParameter("content");
-        BoardEntity boardEntity=new BoardEntity();
-        //현재 날짜가져오기
-        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
-        Date time = new Date();
-        boardEntity.setCreated_date(time);
-        boardEntity.setWriter(writer);
-        boardEntity.setTitle(title);
-        boardEntity.setContent(content);
-        boardService.save(boardEntity);
+        boardService.write(request);
         return "redirect:/";
     }
     //게시글상세보기
@@ -72,5 +61,21 @@ public class MainController {
         String values[] = request.getParameterValues("deleteCheck");
         boardService.checkDelete(values);
         return "redirect:/";
+    }
+    //게시글 수정화면 이동
+    @RequestMapping("/modifyView")
+    public ModelAndView  modifyView(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView("board/update");
+        String key=request.getParameter("id");
+        int id=Integer.parseInt(key);
+        mv.addObject("value", boardService.getOne(id));
+        return mv;
+    }
+    //게시글 수정
+    @RequestMapping("/update")
+    public ModelAndView  update(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView("board/detail");
+        mv.addObject("value",boardService.update(request));
+        return mv;
     }
 }

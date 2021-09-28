@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>글 상세보기</title>
 </head>
 <body>
-
+<form action="/update" method="post">
+    작성자 : <input type="text" name="writer" size="12"  th:value="${value.writer}"> </br>
+    제목 : <input type="text" name="title" size="12" th:value="${value.title}"></br>
+    <textarea class="form-control" rows="5" name="content"  th:text="${value.content}">
+    </textarea>
+    <br>
+    <input type="hidden" name="id" th:value="${value.id}" >
+    <input type="submit" value="수정하기">
+</form>
 </body>
 </html>

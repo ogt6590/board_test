@@ -24,8 +24,11 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 
     @Override
     void deleteById(Integer integer);
+
     @Transactional
     @Modifying
     @Query("delete from board_test b where b.id in :ids")
     void deleteAllByIdInQuery(int[] ids);
+
+
 }

@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>글작성</title>
+    <title>글 상세보기</title>
+    <style type="text/css">
+        a { text-decoration:none  }
+        a:hover { text-decoration:none  }
+    </style>
 </head>
 <body>
 <form action="/boardWrite" method="post">
@@ -11,8 +15,14 @@
     <textarea class="form-control" rows="5" name="content" readonly th:text="${value.content}">
     </textarea>
 </form>
-<a th:href="@{/delete(id=${value.id})}">
-    <button name="button">삭제</button>
-</a>
+<span>
+    <a th:href="@{/delete(id=${value.id})}"><button name="button">삭제</button></a>
+</span>
+<span>
+    <a th:href="@{/modifyView(id=${value.id})}"><button name="button">수정</button></a>
+</span>
+<span>
+    <a th:href="@{/}"><button name="button">목록</button></a>
+</span>
 </body>
 </html>
