@@ -28,7 +28,7 @@ public class MainController {
         return mv;
     }
     //게시글 작성화면이동
-    @RequestMapping("/write")
+    @RequestMapping("/writeView")
     public String writeView(Model model){
         return "board/write";
     }
@@ -49,6 +49,7 @@ public class MainController {
         boardService.save(boardEntity);
         return "redirect:/";
     }
+    //게시글상세보기
     @RequestMapping("/detail")
     public ModelAndView  detailView(HttpServletRequest request){
         ModelAndView mv = new ModelAndView("board/detail");
@@ -56,5 +57,20 @@ public class MainController {
         int id=Integer.parseInt(key);
         mv.addObject("value", boardService.getOne(id));
         return mv;
+    }
+    //게시글삭제
+    @RequestMapping("/delete")
+    public String  delete(HttpServletRequest request){
+        String key=request.getParameter("id");
+        int id=Integer.parseInt(key);
+        boardService.deleteId(id);
+        return "redirect:/";
+    }
+    //게시글 일괄삭제
+    @RequestMapping("/checkDelete")
+    public String  checkDelete(HttpServletRequest request){
+        String values[] = request.getParameterValues("deleteCheck");
+        boardService.checkDelete(values);
+        return "redirect:/";
     }
 }

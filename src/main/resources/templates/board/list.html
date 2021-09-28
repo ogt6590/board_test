@@ -5,19 +5,23 @@
     <title>글목록</title>
 </head>
 <body>
-
-<table border="1">
-    <th>작성날짜</th>
-    <th>제목</th>
-    <th>작성자</th>
-    <th>작성날짜</th>
-    <tr th:each="value,i : ${list}">
-        <td th:text="${i.index+1}"></td>
-        <td><a th:href="@{/detail(id=${value.id})}" th:text="${value.title}"></a></td>
-        <td th:text="${value.writer}"></td>
-        <td th:text="${#dates.format(value.created_date, 'yyyy-MM-dd')}"></td>
-    </tr>
-</table>
-<button name="button" onclick="location.href='/write'">작성버튼</button>
+<form action="/checkDelete" method="post">
+    <input type="submit" value="일괄삭제">
+    <table border="1">
+        <th>작성날짜</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성날짜</th>
+        <th>삭제체크</th>
+        <tr th:each="value,i : ${list}">
+            <td th:text="${i.index+1}"></td>
+            <td><a th:href="@{/detail(id=${value.id})}" th:text="${value.title}"></a></td>
+            <td th:text="${value.writer}"></td>
+            <td th:text="${#dates.format(value.created_date, 'yyyy-MM-dd')}"></td>
+            <td><input type="checkbox" name="deleteCheck" th:value="${value.id}"></td>
+        </tr>
+    </table>
+</form>
+<button name="button" onclick="location.href='/writeView'">작성버튼</button>
 </body>
 </html>

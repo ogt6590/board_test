@@ -5,6 +5,7 @@ import com.example.board_test.demo.Repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +24,14 @@ public class BoardService {
 
     public BoardEntity getOne(int key) {
        return boardRepository.getOne(key);
+    }
+
+    public void deleteId(int key){
+        boardRepository.deleteById(key);
+    }
+
+    public void checkDelete(String[] values){
+        int[] ids = Arrays.asList(values).stream().mapToInt(Integer::parseInt).toArray();
+        boardRepository.deleteAllByIdInQuery(ids);
     }
 }
