@@ -15,7 +15,7 @@
         <th>작성날짜</th>
         <th>삭제체크</th>
         <tr th:each="value,i : ${boards}">
-            <td th:text="${i.index+1}"></td>
+            <td th:text="${ (i.index + 1 ) + (boards.pageable.pageNumber ) * 10 }"></td>
             <td><a th:href="@{/detail(id=${value.id})}" th:text="${value.title}"></a></td>
             <td th:text="${value.writer}"></td>
             <td th:text="${#dates.format(value.created_date, 'yyyy-MM-dd')}"></td>
