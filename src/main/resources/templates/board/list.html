@@ -8,11 +8,11 @@
 <body>
 <form action="/checkDelete" method="post">
     <input type="submit" value="일괄삭제">
-    <table border="1"> 
+    <table border="1">
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
-        <th>작성날짜</th>
+        <th>작성날짜</th>  
         <th>삭제체크</th>
         <tr th:each="value,i : ${boards}">
             <td th:text="${ (i.index + 1 ) + (boards.pageable.pageNumber ) * 10 }"></td>
