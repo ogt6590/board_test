@@ -3,9 +3,12 @@ package com.example.board_test.demo.controller;
 import com.example.board_test.demo.Entity.BoardEntity;
 import com.example.board_test.demo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +24,12 @@ public class MainController {
     BoardService boardService;
     //게시판 전체 리스트 가져오기
     @RequestMapping("/")
-    public ModelAndView  mainView(Model model){
-        List<BoardEntity> board=boardService.AllList();
+    public ModelAndView  mainView(Model model,
+                                  @RequestParam(value = "page", defaultValue = "0") int page){
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        Page<BoardEntity> board = boardService.page(pageRequest);
         ModelAndView mv = new ModelAndView("board/list");
-        mv.addObject("list",board);
+        mv.addObject("boards",board);
         return mv;
     }
     //게시글 작성화면이동

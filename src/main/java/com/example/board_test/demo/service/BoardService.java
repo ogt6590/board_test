@@ -3,6 +3,8 @@ package com.example.board_test.demo.service;
 import com.example.board_test.demo.Entity.BoardEntity;
 import com.example.board_test.demo.Repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-
-    public List<BoardEntity> AllList() {
-        return boardRepository.findAll();
-    }
 
     public void write(HttpServletRequest request) {
         //현재 날짜가져오기
@@ -57,5 +55,8 @@ public class BoardService {
         boardRepository.save(board);
         //수정후 상세페이지 이동
         return boardRepository.getOne(id);
+    }
+    public Page<BoardEntity> page(PageRequest pageRequest) {
+        return  boardRepository.findAll(pageRequest);
     }
 }
