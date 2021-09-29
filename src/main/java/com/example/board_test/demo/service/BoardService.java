@@ -20,6 +20,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public void write(HttpServletRequest request) {
+
         //현재 날짜가져오기
         Date time = new Date();
         BoardEntity boardEntity=new BoardEntity();
